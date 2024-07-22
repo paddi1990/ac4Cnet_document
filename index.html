@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to modCnet’s documentation! &mdash; modCnet 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=fc837d61"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            modCnet
+          </a>
+              <div class="version">
+                1.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_preprocessing.html">Data preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run_examples.html">Run examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_postprocessing.html">Data postprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing modCnet</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">modCnet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to modCnet’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-modcnet-s-documentation">
+<h1>Welcome to modCnet’s documentation!<a class="headerlink" href="#welcome-to-modcnet-s-documentation" title="Link to this heading"></a></h1>
+<p>modCnet is a deep learning framework designed to harness the power of Oxford Nanopore direct RNA sequencing for precise identification of N4-acetylcytidine (ac4C) and 5-methylcytosine (m5C) sites, a crucial aspect in RNA modification studies. By effectively distinguishing ac4C and m5C from unmodified cytidine, modCnet enables accurate estimation of modification rates at each ac4C site. Through rigorous validation on independent in vitro datasets and a human cell line, modCnet showcases its robustness, versatility, and immense potential in advancing the understanding and exploration of ac4C modifications in mRNA.</p>
+<p>To use modCnet, you can follow the instructions below:</p>
+</section>
+<section id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_preprocessing.html">Data preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data_preprocessing.html#basecalling">Basecalling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_preprocessing.html#multi-fast5-to-single-fast5">Multi-fast5 to single-fast5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_preprocessing.html#resquiggling">Resquiggling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_preprocessing.html#feature-extraction">Feature extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#source-code">Source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#data-processing">Data processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#training-from-scratch">Training from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#prediction">Prediction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="run_examples.html">Run examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="run_examples.html#train-ac4c-model-using-ivt-datasets">Train ac4C model using IVT datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run_examples.html#train-m5c-model-using-ivt-datasets">Train m5C model using IVT datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run_examples.html#predict-ac4c-sites-in-human-cell-line">Predict ac4C sites in human cell line</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data_postprocessing.html">Data postprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data_postprocessing.html#transcriptome-location-to-genome-location">Transcriptome location to genome location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_postprocessing.html#read-level-predictions-to-site-level-predictions">Read-level predictions to site-level predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_postprocessing.html#futher-analysis">Futher analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing modCnet</a></li>
+</ul>
+</div>
+<section id="citing-modcnet">
+<h2>Citing modCnet<a class="headerlink" href="#citing-modcnet" title="Link to this heading"></a></h2>
+<p>If you use modCnet in your research, please cite <strong>**********************************</strong></p>
+</section>
+<section id="contacts">
+<h2>Contacts<a class="headerlink" href="#contacts" title="Link to this heading"></a></h2>
+<p>modCnet is developed and maintained by <a class="reference external" href="https://github.com/paddi1990">You Wu</a> and <a class="reference external" href="https://github.com/yulab2021">Xiang Yu</a> from Shanghai Jiao Tong University. If you want to contribute or have any questions, please leave an issue in <a class="reference external" href="https://github.com/yulab2021/modCnet/issues">our repository</a>.</p>
+<p>Thank you!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Yulab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

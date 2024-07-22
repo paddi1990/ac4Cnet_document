@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data postprocessing &mdash; modCnet 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fc837d61"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            modCnet
+          </a>
+              <div class="version">
+                1.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_preprocessing.html">Data preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run_examples.html">Run examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_postprocessing.html">Data postprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing modCnet</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">modCnet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Data postprocessing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/.ipynb_checkpoints/data_postprocessing-checkpoint.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-postprocessing">
+<span id="id1"></span><h1>Data postprocessing<a class="headerlink" href="#data-postprocessing" title="Link to this heading"></a></h1>
+<section id="transcriptome-location-to-genome-location">
+<h2>Transcriptome location to genome location<a class="headerlink" href="#transcriptome-location-to-genome-location" title="Link to this heading"></a></h2>
+<p>In modification detection tasks that utilize Direct RNA Sequencing (DRS) data, where sequences are mapped to transcripts, it is often necessary to convert transcriptome locations to genome locations for comparison with other tools or experimental results. The script <code class="docutils literal notranslate"><span class="pre">scripts/transcriptome_location_to_genome_location.py</span></code> will take TandemMod prediction file as input and convert the transcriptome locations to genome locations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">transcriptome_location_to_genome_location</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">-</span><span class="n">i</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">o</span> <span class="n">OUTPUT</span> <span class="o">-</span><span class="n">g</span> <span class="n">GFF</span>
+<span class="n">Convert</span> <span class="n">transcriptome</span> <span class="n">location</span> <span class="n">to</span> <span class="n">genome</span> <span class="n">location</span><span class="o">.</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>                   <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">i</span> <span class="n">INPUT</span><span class="p">,</span> <span class="o">--</span><span class="nb">input</span> <span class="n">INPUT</span>      <span class="n">Input</span> <span class="n">file</span><span class="p">,</span><span class="n">transcriptome</span> <span class="n">location</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">OUTPUT</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span> <span class="n">OUTPUT</span>   <span class="n">Output</span> <span class="n">file</span><span class="p">,</span> <span class="n">genome</span> <span class="n">location</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">g</span> <span class="n">GFF</span><span class="p">,</span> <span class="o">--</span><span class="n">gff</span> <span class="n">GFF</span>            <span class="n">Annotation</span> <span class="n">file</span><span class="o">.</span>
+
+<span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">transcriptome_location_to_genome_location</span><span class="o">.</span><span class="n">py</span> \
+    <span class="o">--</span><span class="nb">input</span> <span class="n">predictions</span><span class="o">.</span><span class="n">tsv</span> \
+    <span class="o">--</span><span class="n">output</span> <span class="n">predictions_genome_loc</span><span class="o">.</span><span class="n">tsv</span> \
+    <span class="o">--</span><span class="n">gff</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">genome_annotation</span><span class="o">.</span><span class="n">gtf</span>
+</pre></div>
+</div>
+<p>In the above command, replace “predictions.tsv” with the actual TandemMod prediction file you have, and specify the desired output file name using <code class="docutils literal notranslate"><span class="pre">--output</span></code>. The script will read the input prediction file, convert the transcriptome locations to genome locations, and save the converted predictions in the specified output file. Additionally, for the conversion, the script requires a genome annotation file in GFF (General Feature Format) format. The GFF file contains genomic coordinates and annotations for various features such as genes, exons, and transcripts.</p>
+<p>Here is an example to illustrate the transcriptome locations format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transcript_id</span>           <span class="n">site</span>    <span class="n">motif</span>   <span class="n">read_id</span>                                 <span class="n">prediction</span>   <span class="n">probability</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">218</span>     <span class="n">GACCA</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">0.11261273</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">219</span>     <span class="n">ACCAG</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">m5C</span>          <span class="mf">0.95669556</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">223</span>     <span class="n">GGCCA</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">4.225098e-14</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">224</span>     <span class="n">GCCAC</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">6.3074664e-11</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">226</span>     <span class="n">CACCT</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">5.365696e-05</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">227</span>     <span class="n">ACCTA</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">1.9726056e-06</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">230</span>     <span class="n">TACGA</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">0.00010113342</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">233</span>     <span class="n">GACAA</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">4.4892527e-11</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">237</span>     <span class="n">AGCTG</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">5.053165e-10</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">240</span>     <span class="n">TGCTC</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">3.4177435e-16</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">242</span>     <span class="n">CTCTC</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">0.031539176</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">244</span>     <span class="n">CTCCG</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">0.08256312</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">245</span>     <span class="n">TCCGA</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">0.0004769674</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">252</span>     <span class="n">TGCCC</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">2.2711574e-30</span>
+<span class="n">LOC_Os08g44480</span><span class="mf">.1</span>        <span class="mi">253</span>     <span class="n">GCCCA</span>   <span class="n">b32995bf</span><span class="o">-</span><span class="mi">9975</span><span class="o">-</span><span class="mi">4</span><span class="n">ff6</span><span class="o">-</span><span class="mi">86</span><span class="n">c6</span><span class="o">-</span><span class="mi">29</span><span class="n">c900f321d6</span>    <span class="n">C</span>            <span class="mf">7.629347e-21</span>
+</pre></div>
+</div>
+<p>Here are the converted results in genome locations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transcript_id</span>           <span class="n">site</span>    <span class="nb">chr</span>     <span class="n">site</span>            <span class="n">motif</span>   <span class="n">prediction</span>   <span class="n">probability</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">826</span>     <span class="n">Chr6</span>    <span class="mi">21495252</span>        <span class="n">ATCGG</span>   <span class="n">C</span>            <span class="mf">4.780567e-05</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">831</span>     <span class="n">Chr6</span>    <span class="mi">21495257</span>        <span class="n">ATCTT</span>   <span class="n">C</span>            <span class="mf">3.1403553e-09</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">836</span>     <span class="n">Chr6</span>    <span class="mi">21495262</span>        <span class="n">GTCGT</span>   <span class="n">m5C</span>          <span class="mf">0.998418</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">850</span>     <span class="n">Chr6</span>    <span class="mi">21495276</span>        <span class="n">GTCTG</span>   <span class="n">C</span>            <span class="mf">2.6889346e-08</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">853</span>     <span class="n">Chr6</span>    <span class="mi">21495279</span>        <span class="n">TGCTA</span>   <span class="n">C</span>            <span class="mf">7.5095416e-11</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">856</span>     <span class="n">Chr6</span>    <span class="mi">21495282</span>        <span class="n">TACAT</span>   <span class="n">C</span>            <span class="mf">0.013431426</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">871</span>     <span class="n">Chr6</span>    <span class="mi">21495297</span>        <span class="n">TGCCT</span>   <span class="n">C</span>            <span class="mf">2.3783017e-05</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">872</span>     <span class="n">Chr6</span>    <span class="mi">21495298</span>        <span class="n">GCCTT</span>   <span class="n">C</span>            <span class="mf">8.105786e-09</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">877</span>     <span class="n">Chr6</span>    <span class="mi">21495303</span>        <span class="n">TGCTT</span>   <span class="n">C</span>            <span class="mf">1.7306347e-12</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">881</span>     <span class="n">Chr6</span>    <span class="mi">21495307</span>        <span class="n">TGCCT</span>   <span class="n">C</span>            <span class="mf">1.315495e-09</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">882</span>     <span class="n">Chr6</span>    <span class="mi">21495308</span>        <span class="n">GCCTT</span>   <span class="n">C</span>            <span class="mf">6.700999e-10</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">888</span>     <span class="n">Chr6</span>    <span class="mi">21495314</span>        <span class="n">GGCAA</span>   <span class="n">C</span>            <span class="mf">4.613933e-09</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">891</span>     <span class="n">Chr6</span>    <span class="mi">21495317</span>        <span class="n">AACCT</span>   <span class="n">C</span>            <span class="mf">6.412733e-07</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">892</span>     <span class="n">Chr6</span>    <span class="mi">21495318</span>        <span class="n">ACCTG</span>   <span class="n">C</span>            <span class="mf">2.1830398e-05</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">901</span>     <span class="n">Chr6</span>    <span class="mi">21495445</span>        <span class="n">TACAG</span>   <span class="n">C</span>            <span class="mf">0.009539205</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">912</span>     <span class="n">Chr6</span>    <span class="mi">21495456</span>        <span class="n">TACTT</span>   <span class="n">C</span>            <span class="mf">0.3794193</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">916</span>     <span class="n">Chr6</span>    <span class="mi">21495460</span>        <span class="n">TGCAG</span>   <span class="n">C</span>            <span class="mf">0.08652508</span>
+<span class="n">LOC_Os06g36590</span><span class="mf">.1</span>        <span class="mi">922</span>     <span class="n">Chr6</span>    <span class="mi">21495466</span>        <span class="n">ATCTA</span>   <span class="n">C</span>            <span class="mf">5.3866494e-05</span>
+</pre></div>
+</div>
+</section>
+<section id="read-level-predictions-to-site-level-predictions">
+<h2>Read-level predictions to site-level predictions<a class="headerlink" href="#read-level-predictions-to-site-level-predictions" title="Link to this heading"></a></h2>
+<p>TandemMod provided single-read predictions as well as their modification probabilities. By aggregating all the predictions for each site, we can derive a consensus or summary prediction for that specific genomic location. The script is located under <code class="docutils literal notranslate"><span class="pre">scripts/read_level_prediction_to_site_level_prediction.py</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">read_level_prediction_to_site_level_prediction</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">-</span><span class="n">i</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">o</span>  <span class="n">OUTPUT</span>
+<span class="n">Convert</span> <span class="n">read</span><span class="o">-</span><span class="n">level</span> <span class="n">predictions</span> <span class="n">to</span> <span class="n">site</span><span class="o">-</span><span class="n">level</span> <span class="n">predictions</span><span class="o">.</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>                     <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">i</span> <span class="n">INPUT</span><span class="p">,</span> <span class="o">--</span><span class="nb">input</span> <span class="n">INPUT</span>        <span class="n">Input</span> <span class="n">file</span><span class="p">,</span><span class="n">transcriptome</span> <span class="n">location</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">OUTPUT</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span> <span class="n">OUTPUT</span>     <span class="n">Output</span> <span class="n">file</span><span class="p">,</span> <span class="n">genome</span> <span class="n">location</span><span class="o">.</span>
+
+<span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">read_level_prediction_to_site_level_prediction</span><span class="o">.</span><span class="n">py</span> \
+    <span class="o">--</span><span class="nb">input</span> <span class="n">read_level_prediction</span><span class="o">.</span><span class="n">tsv</span> \
+    <span class="o">--</span><span class="n">output</span> <span class="n">site_level_prediction</span><span class="o">.</span><span class="n">tsv</span>
+</pre></div>
+</div>
+<p>In the given command, please replace “read_level_prediction.tsv” with the converted results obtained from the <code class="docutils literal notranslate"><span class="pre">transcriptome_location_to_genome_location.py</span></code> script. Specify the desired output file name using the <code class="docutils literal notranslate"><span class="pre">--output</span></code> option. The script will then aggregate the read-level predictions to derive site-level predictions. The resulting predictions will include the count of modified bases, considering the predictions with probability values ranging from 0.5 to 0.95 as the cutoff range. The total base count is located in the last column.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transcriptome_id</span>        <span class="n">site</span>    <span class="nb">chr</span>     <span class="n">site</span>            <span class="n">motif</span>   <span class="n">p_0</span><span class="mf">.5</span>     <span class="n">p_0</span><span class="mf">.6</span>     <span class="n">p_0</span><span class="mf">.7</span>     <span class="n">p_0</span><span class="mf">.8</span>     <span class="n">p_0</span><span class="mf">.9</span>     <span class="n">p_0</span><span class="mf">.95</span>    <span class="n">total</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">445</span>     <span class="n">Chr5</span>    <span class="mi">24059817</span>        <span class="n">TGCGC</span>   <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">1</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">447</span>     <span class="n">Chr5</span>    <span class="mi">24059815</span>        <span class="n">CGCCA</span>   <span class="mi">1</span>         <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">448</span>     <span class="n">Chr5</span>    <span class="mi">24059814</span>        <span class="n">GCCAG</span>   <span class="mi">4</span>         <span class="mi">4</span>         <span class="mi">4</span>         <span class="mi">4</span>         <span class="mi">2</span>         <span class="mi">1</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">451</span>     <span class="n">Chr5</span>    <span class="mi">24059811</span>        <span class="n">AGCGG</span>   <span class="mi">10</span>        <span class="mi">8</span>         <span class="mi">7</span>         <span class="mi">6</span>         <span class="mi">3</span>         <span class="mi">2</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">454</span>     <span class="n">Chr5</span>    <span class="mi">24059808</span>        <span class="n">GGCAC</span>   <span class="mi">15</span>        <span class="mi">14</span>        <span class="mi">14</span>        <span class="mi">11</span>        <span class="mi">10</span>        <span class="mi">8</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">456</span>     <span class="n">Chr5</span>    <span class="mi">24059806</span>        <span class="n">CACTG</span>   <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">1</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">462</span>     <span class="n">Chr5</span>    <span class="mi">24059800</span>        <span class="n">TACAT</span>   <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">465</span>     <span class="n">Chr5</span>    <span class="mi">24059797</span>        <span class="n">ATCCA</span>   <span class="mi">6</span>         <span class="mi">6</span>         <span class="mi">6</span>         <span class="mi">5</span>         <span class="mi">5</span>         <span class="mi">3</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">466</span>     <span class="n">Chr5</span>    <span class="mi">24059796</span>        <span class="n">TCCAG</span>   <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">1</span>         <span class="mi">1</span>         <span class="mi">0</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">471</span>     <span class="n">Chr5</span>    <span class="mi">24059791</span>        <span class="n">AGCAC</span>   <span class="mi">11</span>        <span class="mi">8</span>         <span class="mi">7</span>         <span class="mi">5</span>         <span class="mi">3</span>         <span class="mi">2</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">473</span>     <span class="n">Chr5</span>    <span class="mi">24059789</span>        <span class="n">CACAT</span>   <span class="mi">1</span>         <span class="mi">1</span>         <span class="mi">1</span>         <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">479</span>     <span class="n">Chr5</span>    <span class="mi">24059783</span>        <span class="n">TGCTA</span>   <span class="mi">1</span>         <span class="mi">1</span>         <span class="mi">1</span>         <span class="mi">1</span>         <span class="mi">0</span>         <span class="mi">0</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">482</span>     <span class="n">Chr5</span>    <span class="mi">24059780</span>        <span class="n">TACCT</span>   <span class="mi">5</span>         <span class="mi">5</span>         <span class="mi">5</span>         <span class="mi">4</span>         <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">483</span>     <span class="n">Chr5</span>    <span class="mi">24059779</span>        <span class="n">ACCTC</span>   <span class="mi">5</span>         <span class="mi">5</span>         <span class="mi">5</span>         <span class="mi">5</span>         <span class="mi">4</span>         <span class="mi">4</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">485</span>     <span class="n">Chr5</span>    <span class="mi">24059777</span>        <span class="n">CTCTG</span>   <span class="mi">4</span>         <span class="mi">4</span>         <span class="mi">4</span>         <span class="mi">3</span>         <span class="mi">2</span>         <span class="mi">1</span>         <span class="mi">63</span>
+<span class="n">LOC_Os05g41060</span><span class="mf">.1</span>        <span class="mi">508</span>     <span class="n">Chr5</span>    <span class="mi">24059754</span>        <span class="n">GGCTT</span>   <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">2</span>         <span class="mi">1</span>         <span class="mi">1</span>         <span class="mi">1</span>         <span class="mi">63</span>
+</pre></div>
+</div>
+</section>
+<section id="futher-analysis">
+<h2>Futher analysis<a class="headerlink" href="#futher-analysis" title="Link to this heading"></a></h2>
+<p>The other data processing and plot scripts are located under the <a class="reference external" href="https://github.com/yulab2021/TandemMod/tree/master/results_reproduce">plot</a>  directory.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Yulab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

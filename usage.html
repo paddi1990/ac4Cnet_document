@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage &mdash; modCnet 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=fc837d61"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Run examples" href="run_examples.html" />
+    <link rel="prev" title="Data preprocessing" href="data_preprocessing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            modCnet
+          </a>
+              <div class="version">
+                1.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_preprocessing.html">Data preprocessing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#source-code">Source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-processing">Data processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training-from-scratch">Training from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prediction">Prediction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="run_examples.html">Run examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_postprocessing.html">Data postprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing modCnet</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">modCnet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
+<section id="source-code">
+<h2>Source code<a class="headerlink" href="#source-code" title="Link to this heading"></a></h2>
+<p>The source code and data processing scripts are available on <a class="reference external" href="https://github.com/yulab2021/modCnet">GitHub</a>. You can download them by using the git clone command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">yulab2021</span><span class="o">/</span><span class="n">modCnet</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>In the provided repository, the pretrained models are located under the <code class="docutils literal notranslate"><span class="pre">./model</span></code> directory, and the data processing scripts and the main script are located under the <code class="docutils literal notranslate"><span class="pre">./script</span></code> directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+├── modCnet.yaml
+├── data
+│   ├── event_level_features_C_base_quality.csv
+│   ├── event_level_features_C_length.csv
+│   ├── event_level_features_C_mean.csv
+│   ├── event_level_features_C_median.csv
+│   ├── event_level_features_C_std.csv
+│   ├── IVT_transcripts_ac4C.csv
+│   ├── IVT_transcripts_C.csv
+│   ├── IVT_transcripts_m5C.csv
+│   ├── qPCR_curve_4.13_1.csv
+│   ├── qPCR_curve_4.13_2.csv
+│   └── Rn_cycle_curve.csv
+├── demo_data
+│   ├── ac4C.feature.test.tsv
+│   ├── ac4C.feature.train.tsv
+│   ├── C.feature.test.tsv
+│   ├── C.feature.train.tsv
+│   ├── GRCh38_subset_reference.fa
+│   ├── HeLa
+│   ├── IVT_DRS.reference.fasta
+│   ├── IVT_fast5
+│   ├── IVT_fast5_guppy
+│   ├── IVT_fast5_guppy_single
+│   ├── IVT.fastq
+│   ├── IVT.feature
+│   ├── IVT.sam
+│   ├── m5C.feature.test.tsv
+│   ├── m5C.feature.train.tsv
+│   ├── model
+│   └── test.feature.tsv
+├── docs
+│   └── test
+├── model
+│   ├── C_ac4C.pkl
+│   ├── C_m5C_ac4C.pkl
+│   ├── C_m5C.pkl
+│   └── m5C_ac4C.pkl
+├── README.md
+├── results_reproduce
+│   └── figure1_script.ipynb
+└── script
+    ├── modCnet.py
+    ├── feature_extraction.py
+    ├── __init__.py
+    ├── model.py
+    ├── models.py
+    ├── __pycache__
+    ├── read_level_prediction_to_site_level_prediction.py
+    ├── transcriptome_location_to_genome_location.py
+    └── utils.py
+</pre></div>
+</div>
+</section>
+<section id="data-processing">
+<h2>Data processing<a class="headerlink" href="#data-processing" title="Link to this heading"></a></h2>
+<p>The data processing procedure is essential for training and prediction. The raw FAST5 files need to be converted into feature files that can be used as input for the model. The data processing scripts are located in the <code class="docutils literal notranslate"><span class="pre">./script</span></code> directory. The following steps are required to process the raw FAST5 files.</p>
+<p>1. Guppy basecalling</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">guppy_basecaller</span> <span class="o">-</span><span class="n">i</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C</span> <span class="o">-</span><span class="n">s</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C_guppy</span> <span class="o">--</span><span class="n">num_callers</span> <span class="mi">40</span> <span class="o">--</span><span class="n">recursive</span> <span class="o">--</span><span class="n">fast5_out</span> <span class="o">--</span><span class="n">config</span> <span class="n">rna_r9</span><span class="mf">.4.1_70</span><span class="n">bps_hac</span><span class="o">.</span><span class="n">cfg</span>
+</pre></div>
+</div>
+<p>2. Multi-fast5 to single-fast5</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">multi_to_single_fast5</span> <span class="o">-</span><span class="n">i</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C_guppy</span> <span class="o">-</span><span class="n">s</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C_guppy_single</span> <span class="o">-</span><span class="n">t</span> <span class="mi">40</span> <span class="o">--</span><span class="n">recursive</span>
+</pre></div>
+</div>
+<p>3. Tombo resquiggling</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tombo</span> <span class="n">resquiggle</span> <span class="o">--</span><span class="n">overwrite</span> <span class="o">--</span><span class="n">basecall</span><span class="o">-</span><span class="n">group</span> <span class="n">Basecall_1D_000</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C_single</span>  <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_DRS_ac4C</span><span class="o">.</span><span class="n">reference</span><span class="o">.</span><span class="n">fasta</span> <span class="o">--</span><span class="n">processes</span> <span class="mi">40</span> <span class="o">--</span><span class="n">fit</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">scale</span> <span class="o">--</span><span class="n">include</span><span class="o">-</span><span class="n">event</span><span class="o">-</span><span class="n">stdev</span>
+</pre></div>
+</div>
+<p>4. Mapping to reference</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C_guppy</span><span class="o">/</span><span class="k">pass</span><span class="o">/*.</span><span class="n">fastq</span> <span class="o">&gt;</span><span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C</span><span class="o">.</span><span class="n">fastq</span>
+<span class="n">minimap2</span> <span class="o">-</span><span class="n">ax</span> <span class="nb">map</span><span class="o">-</span><span class="n">ont</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_DRS_ac4C</span><span class="o">.</span><span class="n">reference</span><span class="o">.</span><span class="n">fasta</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C</span><span class="o">.</span><span class="n">fastq</span> <span class="o">&gt;</span><span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C</span><span class="o">.</span><span class="n">sam</span>
+</pre></div>
+</div>
+<p>5. Feature extraction</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">script</span><span class="o">/</span><span class="n">feature_extraction</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="nb">input</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C_guppy_single</span> \
+    <span class="o">--</span><span class="n">reference</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_DRS_ac4C</span><span class="o">.</span><span class="n">reference</span><span class="o">.</span><span class="n">fasta</span>  \
+    <span class="o">--</span><span class="n">sam</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C</span><span class="o">.</span><span class="n">sam</span> \
+    <span class="o">--</span><span class="n">output</span> <span class="n">demo_data</span><span class="o">/</span><span class="n">IVT_ac4C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">tsv</span> \
+    <span class="o">--</span><span class="n">clip</span> <span class="mi">10</span> \
+    <span class="o">--</span><span class="n">motif</span> <span class="n">NNCNN</span>
+</pre></div>
+</div>
+</section>
+<section id="training-from-scratch">
+<h2>Training from scratch<a class="headerlink" href="#training-from-scratch" title="Link to this heading"></a></h2>
+<p>The de novo training mode in modCnet enables users to train the model from scratch using their own datasets. To train a modCnet model, both modified and modification-free Direct RNA Sequencing (DRS) data are required.</p>
+<p>Before training, the raw FAST5 files need to undergo the <a class="reference external" href="data_preprocessing">data processing procedure</a> . This process generates feature files specific to each modification type. The feature files should follow a naming convention that reflects the modification type they represent:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|--</span> <span class="n">data</span>
+<span class="o">|</span>   <span class="o">|--</span> <span class="n">C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">tsv</span>
+<span class="o">|</span>   <span class="o">|--</span> <span class="n">ac4C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">tsv</span>
+</pre></div>
+</div>
+<p>In order to evaluate the performance during the training process, it is important to have a separate test dataset. Here’s a script that randomly splits the feature file into training and test sets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">script</span><span class="o">/</span><span class="n">train_test_split</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">input_file</span> <span class="n">data</span><span class="o">/</span><span class="n">C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">tsv</span> <span class="o">--</span><span class="n">train_file</span> <span class="n">data</span><span class="o">/</span><span class="n">C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">tsv</span> <span class="o">--</span><span class="n">test_file</span> <span class="n">data</span><span class="o">/</span><span class="n">C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">tsv</span> <span class="o">--</span><span class="n">train_ratio</span> <span class="mf">0.8</span>
+<span class="n">python</span> <span class="n">script</span><span class="o">/</span><span class="n">train_test_split</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">input_file</span> <span class="n">data</span><span class="o">/</span><span class="n">ac4C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">tsv</span> <span class="o">--</span><span class="n">train_file</span> <span class="n">data</span><span class="o">/</span><span class="n">ac4C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">tsv</span> <span class="o">--</span><span class="n">test_file</span> <span class="n">data</span><span class="o">/</span><span class="n">ac4C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">tsv</span> <span class="o">--</span><span class="n">train_ratio</span> <span class="mf">0.8</span>
+</pre></div>
+</div>
+<p>To train the modCnet model using labelled training dataset, you can set the <code class="docutils literal notranslate"><span class="pre">--run_mode</span></code> argument to “train”. This allows the model to be trained from scratch. Test data are required to evaluation the model performance.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">script</span><span class="o">/</span><span class="n">modCnet</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">run_mode</span> <span class="n">train</span> \
+      <span class="o">--</span><span class="n">model_type</span> <span class="n">C</span><span class="o">/</span><span class="n">ac4C</span> \
+      <span class="o">--</span><span class="n">new_model</span> <span class="n">model</span><span class="o">/</span><span class="n">C_ac4C</span><span class="o">.</span><span class="n">pkl</span> \
+      <span class="o">--</span><span class="n">train_data_C</span> <span class="n">data</span><span class="o">/</span><span class="n">C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">tsv</span> \
+      <span class="o">--</span><span class="n">train_data_ac4C</span> <span class="n">data</span><span class="o">/</span><span class="n">ac4C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">tsv</span> \
+      <span class="o">--</span><span class="n">test_data_C</span> <span class="n">data</span><span class="o">/</span><span class="n">C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">tsv</span> \
+      <span class="o">--</span><span class="n">test_data_ac4C</span> <span class="n">data</span><span class="o">/</span><span class="n">ac4C</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">tsv</span> \
+      <span class="o">--</span><span class="n">epoch</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>The training process can be stopped manually based on the performance on the test set or by setting the maximum number of epochs. You can monitor the performance of the model on the test set during training and decide when to stop based on your desired criteria, such as reaching a certain accuracy or loss threshold. Alternatively, you can set a specific number of epochs as the maximum value for training using the <code class="docutils literal notranslate"><span class="pre">-epoch</span></code> argument. This allows the model to train for a fixed number of iterations, regardless of the performance on the test set. After the specified number of epochs, the training process will automatically stop. By providing these options, you have the flexibility to control the training process based on your specific requirements and preferences. The training process should be something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Epoch</span> <span class="mi">2</span><span class="o">-</span><span class="mi">2</span> <span class="n">Train</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.853227</span><span class="p">,</span> <span class="n">Test</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.801561</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.684026</span>
+<span class="n">Epoch</span> <span class="mi">2</span><span class="o">-</span><span class="mi">3</span> <span class="n">Train</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.857492</span><span class="p">,</span> <span class="n">Test</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.809284</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.689912</span>
+<span class="n">Epoch</span> <span class="mi">2</span><span class="o">-</span><span class="mi">4</span> <span class="n">Train</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.859884</span><span class="p">,</span> <span class="n">Test</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.810469</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.695631</span>
+<span class="n">Epoch</span> <span class="mi">2</span><span class="o">-</span><span class="mi">5</span> <span class="n">Train</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.863527</span><span class="p">,</span> <span class="n">Test</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.812851</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.701268</span>
+<span class="n">Epoch</span> <span class="mi">2</span><span class="o">-</span><span class="mi">6</span> <span class="n">Train</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.865912</span><span class="p">,</span> <span class="n">Test</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.814036</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.701268</span>
+</pre></div>
+</div>
+</section>
+<section id="prediction">
+<h2>Prediction<a class="headerlink" href="#prediction" title="Link to this heading"></a></h2>
+<p>Pretained models were saved in directory <code class="docutils literal notranslate"><span class="pre">./model</span></code>. You can load pretrained models to predict modification for new data by setting the <code class="docutils literal notranslate"><span class="pre">--run_mode</span></code> argument to “predict”. Before prediction, the raw FAST5 files need to undergo the <a class="reference external" href="data_preprocessing">data processing procedure</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">script</span><span class="o">/</span><span class="n">modCnet</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">run_mode</span> <span class="n">predict</span> \
+      <span class="o">--</span><span class="n">pretrained_model</span> <span class="n">model</span><span class="o">/</span><span class="n">C_ac4C</span><span class="o">.</span><span class="n">pkl</span> \
+      <span class="o">--</span><span class="n">feature_file</span> <span class="n">data</span><span class="o">/</span><span class="n">WT</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">tsv</span>
+      <span class="o">--</span><span class="n">predict_result</span> <span class="n">data</span><span class="o">/</span><span class="n">WT</span><span class="o">.</span><span class="n">predict</span><span class="o">.</span><span class="n">tsv</span>
+</pre></div>
+</div>
+<p>The prediction result “data/WT.predict.tsv” has the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transcript_id</span>   <span class="n">site</span>    <span class="n">motif</span>   <span class="n">read_id</span>                                 <span class="n">prediction</span>   <span class="n">probability</span>
+<span class="n">NM_001349947</span><span class="mf">.2</span>  <span class="mi">552</span>     <span class="n">AACCA</span>   <span class="mi">320</span><span class="n">a1a8b</span><span class="o">-</span><span class="mi">7709</span><span class="o">-</span><span class="mi">4335</span><span class="o">-</span><span class="mi">8</span><span class="n">f6a</span><span class="o">-</span><span class="mi">84</span><span class="n">f09ba6592a</span>    <span class="n">unmod</span>        <span class="mf">0.00014777448</span>
+<span class="n">XM_006720125</span><span class="mf">.3</span>  <span class="mi">2437</span>    <span class="n">ACCAG</span>   <span class="mi">53</span><span class="n">dd21de</span><span class="o">-</span><span class="n">f74b</span><span class="o">-</span><span class="mi">44</span><span class="n">db</span><span class="o">-</span><span class="n">baa3</span><span class="o">-</span><span class="mi">06</span><span class="n">c68772b7e1</span>    <span class="n">unmod</span>        <span class="mf">0.062309794</span>
+<span class="n">NM_001321485</span><span class="mf">.2</span>  <span class="mi">498</span>     <span class="n">TGCTG</span>   <span class="mi">1</span><span class="n">f8ce6a2</span><span class="o">-</span><span class="mi">5</span><span class="n">fac</span><span class="o">-</span><span class="mi">4</span><span class="n">a2f</span><span class="o">-</span><span class="n">ae25</span><span class="o">-</span><span class="mi">0</span><span class="n">abdb0de412e</span>    <span class="n">unmod</span>        <span class="mf">0.17353779</span>
+<span class="n">NM_001199673</span><span class="mf">.2</span>  <span class="mi">2972</span>    <span class="n">ATCAA</span>   <span class="mi">5781</span><span class="n">a0c4</span><span class="o">-</span><span class="n">ede0</span><span class="o">-</span><span class="mf">452e-8789</span><span class="o">-</span><span class="mi">9</span><span class="n">a43740451ab</span>    <span class="n">unmod</span>        <span class="mf">0.26891512</span>
+<span class="n">NM_014364</span><span class="mf">.5</span>     <span class="mi">1233</span>    <span class="n">GACAA</span>   <span class="mi">47</span><span class="n">f7b914</span><span class="o">-</span><span class="n">a51e</span><span class="o">-</span><span class="mi">4</span><span class="n">eab</span><span class="o">-</span><span class="n">adb2</span><span class="o">-</span><span class="n">e500d8a46fd1</span>    <span class="n">unmod</span>        <span class="mf">0.029849814</span>
+<span class="n">NM_001321485</span><span class="mf">.2</span>  <span class="mi">515</span>     <span class="n">GCCTC</span>   <span class="mi">31</span><span class="n">fe54e8</span><span class="o">-</span><span class="mi">7724</span><span class="o">-</span><span class="mi">40</span><span class="n">c6</span><span class="o">-</span><span class="n">aaa2</span><span class="o">-</span><span class="mi">025</span><span class="n">ab5de7754</span>    <span class="n">unmod</span>        <span class="mf">0.004975981</span>
+<span class="n">NM_001136267</span><span class="mf">.2</span>  <span class="mi">1780</span>    <span class="n">GACTA</span>   <span class="mi">62</span><span class="n">b6ab58</span><span class="o">-</span><span class="mi">5</span><span class="n">ee0</span><span class="o">-</span><span class="mi">4871</span><span class="o">-</span><span class="mi">95</span><span class="n">d5</span><span class="o">-</span><span class="mi">5</span><span class="n">db66a9c56c7</span>    <span class="n">unmod</span>        <span class="mf">0.0018304548</span>
+<span class="n">NM_001143883</span><span class="mf">.4</span>  <span class="mi">714</span>     <span class="n">TGCAG</span>   <span class="mi">4</span><span class="n">fb0be9b</span><span class="o">-</span><span class="mi">9628</span><span class="o">-</span><span class="mi">46</span><span class="n">aa</span><span class="o">-</span><span class="mi">9</span><span class="n">ba4</span><span class="o">-</span><span class="mi">40</span><span class="n">a6456d7d52</span>    <span class="n">unmod</span>        <span class="mf">0.1989807</span>
+<span class="n">NM_006012</span><span class="mf">.4</span>     <span class="mi">1058</span>    <span class="n">ATCTT</span>   <span class="mi">7</span><span class="n">c7ff067</span><span class="o">-</span><span class="mi">1</span><span class="n">ead</span><span class="o">-</span><span class="mi">4838</span><span class="o">-</span><span class="mi">97</span><span class="n">c8</span><span class="o">-</span><span class="mi">5</span><span class="n">fca91fdfe8a</span>    <span class="n">unmod</span>        <span class="mf">0.06284212</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="data_preprocessing.html" class="btn btn-neutral float-left" title="Data preprocessing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="run_examples.html" class="btn btn-neutral float-right" title="Run examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Yulab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
